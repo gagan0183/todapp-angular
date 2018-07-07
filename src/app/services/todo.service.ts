@@ -1,9 +1,10 @@
 import ToDo from '../models/todo.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Response } from '@angular/http';
+import { Response, Http } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class TodoService {
@@ -32,10 +33,7 @@ export class TodoService {
 
     deleteTodo(id: String): any {
         let deleteUrl = `${this.todoUrl}/${id}`;
-        return this.http.delete(deleteUrl)
-            .map(res => {
-                return res;
-            });
+        return this.http.delete(deleteUrl);
     }
 
     private handleError(error: any): Promise<any> {
